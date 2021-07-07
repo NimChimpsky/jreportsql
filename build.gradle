@@ -1,0 +1,43 @@
+group 'io.jreportsql'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+
+// 1 - apply application and shadow plugins
+apply plugin: 'application'
+apply plugin: 'com.github.johnrengelman.shadow'
+
+// java 16 fails to detect webapplicationlistner
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+mainClassName = 'io.jreportsql.Main'
+
+// 2 - define the dependency to the shadow plugin
+buildscript {
+    repositories {
+        gradlePluginPortal()
+    }
+    dependencies {
+        classpath 'gradle.plugin.com.github.jengelman.gradle.plugins:shadow:7.0.0'
+    }
+}
+
+// 3 - merge service descriptors
+shadowJar {
+    mergeServiceFiles()
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation('org.apache.tomcat.embed:tomcat-embed-jasper:8.0.47')
+    // https://mvnrepository.com/artifact/org.springframework/spring-core
+    implementation group: 'org.springframework', name: 'spring-webmvc', version: '5.3.8'
+
+}
+
+test {
+    useJUnitPlatform()
+}
