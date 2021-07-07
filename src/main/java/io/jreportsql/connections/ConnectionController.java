@@ -1,7 +1,8 @@
-package io.jreportsql;
+package io.jreportsql.connections;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,8 +18,17 @@ public class ConnectionController {
         this.connectionService = connectionService;
     }
 
+    @PostMapping
+    public void createConnection(final ConnectionDTO connectionDTO) {
+        if (connectionService.isValid(connectionDTO)) {
+            connectionService.persist(connectionDTO);
+        } else {
+            throw new IllegalArgumentException("Can't open connection");
+        }
+    }
+
     @GetMapping
-    public String sayHello() {
-        return connectionService.getStr();
+    public ConnectionDTO sayHello() {
+        return new ConnectionDTO("chees", "pwd", "url");
     }
 }

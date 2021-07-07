@@ -10,7 +10,7 @@ apply plugin: 'com.github.johnrengelman.shadow'
 // java 16 fails to detect webapplicationlistner
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
-mainClassName = 'io.jreportsql.Main'
+mainClassName = 'io.jreportsql.conf.Main'
 
 // 2 - define the dependency to the shadow plugin
 buildscript {
@@ -35,6 +35,11 @@ dependencies {
     implementation('org.apache.tomcat.embed:tomcat-embed-jasper:8.0.47')
     // https://mvnrepository.com/artifact/org.springframework/spring-core
     implementation group: 'org.springframework', name: 'spring-webmvc', version: '5.3.8'
+    // https://mvnrepository.com/artifact/org.springframework/spring-jdbc
+    implementation group: 'org.springframework', name: 'spring-jdbc', version: '5.3.8'
+// https://mvnrepository.com/artifact/org.slf4j/slf4j-simple
+    implementation group: 'org.slf4j', name: 'slf4j-simple', version: '1.7.31'
+
 
 }
 

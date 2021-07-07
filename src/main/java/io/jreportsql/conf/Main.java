@@ -1,4 +1,4 @@
-package io.jreportsql;
+package io.jreportsql.conf;
 
 import org.apache.catalina.startup.Tomcat;
 
